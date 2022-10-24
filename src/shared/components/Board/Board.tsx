@@ -1,12 +1,12 @@
-import React from 'react'
-import * as S from './styles'
-import { Word } from '../Word'
-import { useSelector } from 'react-redux'
-import { selectBoard } from 'store'
-import { indexIsLast } from 'shared/utils'
+import React from "react";
+import * as S from "./styles";
+import { Word } from "../Word";
+import { useSelector } from "react-redux";
+import { selectBoard } from "store";
+import { indexIsLast } from "shared/utils";
 
 export function Board() {
-  const board: string[][] = useSelector(selectBoard)
+  const board: string[][] = useSelector(selectBoard);
 
   return (
     <S.Container>
@@ -19,5 +19,5 @@ export function Board() {
         />
       ))}
     </S.Container>
-  )
+  );
 }

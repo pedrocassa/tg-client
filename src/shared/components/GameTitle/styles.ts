@@ -1,15 +1,15 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  width: fit-content;
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 10px 0;
+  padding: 0 0 50px 0;
 
   h1 {
-    font-size: ${({ theme }) => theme.font.sizes.xxxLarge};
-    letter-spacing: 2px;
+    font-size: ${({ theme }) => theme.font.sizes.gameTitle};
+    letter-spacing: 1.5px;
   }
 `;

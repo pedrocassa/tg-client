@@ -1,21 +1,22 @@
-import styled, { css, DefaultTheme } from 'styled-components'
-import { ButtonProps } from './Button'
+import styled, { css, DefaultTheme } from "styled-components";
+import { ButtonProps } from "./Button";
 
 export type StyledButtonProps = Pick<
   ButtonProps,
-  'fullWidth' | 'outlined' | 'backgroundColor'
->
+  "fullWidth" | "outlined" | "backgroundColor"
+>;
 
 const ButtonModifiers = {
   fullWidth: () => css`
     width: 100%;
   `,
+
   outlined: (theme: DefaultTheme, color?: string) => css`
     background-color: transparent;
     color: ${color ?? theme.colors.primary};
     border: 2px solid ${color ?? theme.colors.primary};
-  `
-}
+  `,
+};
 
 export const Button = styled.button<StyledButtonProps>`
   width: min(320px, 100%);
@@ -33,10 +34,15 @@ export const Button = styled.button<StyledButtonProps>`
   ${({ theme, outlined, color }) =>
     outlined && ButtonModifiers.outlined(theme, color)};
 
+  &:hover {
+    opacity: 0.8;
+    scale: 1.05;
+  }
+
   span {
     font-size: ${({ theme }) => theme.font.sizes.medium};
     font-weight: ${({ theme }) => theme.font.weight.bold};
     letter-spacing: ${({ theme }) => theme.font.spacing.medium};
     text-transform: uppercase;
   }
-`
+`;
