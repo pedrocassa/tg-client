@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import * as S from "./styles";
-import { Button, GameTitle } from "shared/components";
+import { Button, GameTitle, RulesDialog } from "shared/components";
 import { useNavigate } from "react-router-dom";
 
 export function Home() {
+  const [rulesDialogVisibility, setRulesDialogVisibility] =
+    useState<boolean>(false);
+
+  const handleOpenRulesDialog = () => setRulesDialogVisibility(true);
+  const handleCloseRulesDialog = () => setRulesDialogVisibility(false);
+
   const navigate = useNavigate();
 
   const handlePlayButtonPress = () => navigate("/play-game");
-  const handleRulesButtonPress = () => null;
 
   return (
     <S.Container>
@@ -20,9 +25,13 @@ export function Home() {
       />
       <Button
         type={"button"}
-        onClick={handleRulesButtonPress}
+        onClick={handleOpenRulesDialog}
         label={"Regras"}
         outlined
+      />
+      <RulesDialog
+        isOpen={rulesDialogVisibility}
+        onClose={handleCloseRulesDialog}
       />
     </S.Container>
   );

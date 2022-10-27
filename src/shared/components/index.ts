@@ -5,4 +5,5 @@ export * from "./Header";
 export * from "./Key";
 export * from "./Keyboard";
 export * from "./Letter";
+export * from "./RulesDialog";
 export * from "./Word";
