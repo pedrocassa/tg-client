@@ -2,11 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="399b5147-f3b6-4150-bae1-d78cb6acfbab" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/shared/constants/term-word-bank.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/shared/components/Button/styles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/components/Button/styles.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/shared/components/Key/styles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/components/Key/styles.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/shared/components/Letter/styles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/components/Letter/styles.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/theme.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/theme.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/home/Home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/home/Home.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/app-routes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/app-routes.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/game/game.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/game/game.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/store.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,6 +48,12 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/shared/constants" />
+      <recent name="$PROJECT_DIR$/src" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -55,7 +64,8 @@
       <updated>1666704128523</updated>
       <workItem from="1666704129827" duration="1295000" />
       <workItem from="1666895470234" duration="4499000" />
-      <workItem from="1666969877455" duration="1824000" />
+      <workItem from="1666969877455" duration="2650000" />
+      <workItem from="1666987661873" duration="3416000" />
     </task>
     <servers />
   </component>

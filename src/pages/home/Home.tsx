@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import * as S from "./styles";
 import { Button, GameTitle, RulesDialog } from "shared/components";
 import { useNavigate } from "react-router-dom";
+import { selectWordBankInitialized } from "../../store";
+import { useSelector } from "react-redux";
 
 export function Home() {
   const [rulesDialogVisibility, setRulesDialogVisibility] =
@@ -12,7 +14,13 @@ export function Home() {
 
   const navigate = useNavigate();
 
-  const handlePlayButtonPress = () => navigate("/play-game");
+  const wordBankInitiliazed = useSelector(selectWordBankInitialized);
+
+  const handlePlayButtonPress = () => {
+    if (!wordBankInitiliazed) return;
+
+    navigate("/play-game");
+  };
 
   return (
     <S.Container>

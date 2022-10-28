@@ -1,88 +1,122 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { RootState } from '../store'
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "../store";
 
 export interface GameState {
-  board: string[][]
-  currentAttempt: number
-  currentPosition: number
-  correctWord: string
+  board: string[][];
+  currentAttempt: number;
+  currentPosition: number;
+  wordBank: Set<string>;
+  wordBankInitialized: boolean;
+  correctWord: string;
 }
 
 const initialState: GameState = {
   board: [
-    ['', '', '', '', ''],
-    ['', '', '', '', ''],
-    ['', '', '', '', ''],
-    ['', '', '', '', ''],
-    ['', '', '', '', ''],
-    ['', '', '', '', ''],
-    ['', '', '', '', '']
+    ["", "", "", "", ""],
+    ["", "", "", "", ""],
+    ["", "", "", "", ""],
+    ["", "", "", "", ""],
+    ["", "", "", "", ""],
+    ["", "", "", "", ""],
+    ["", "", "", "", ""],
   ],
   currentAttempt: 0,
   currentPosition: 0,
-  correctWord: 'porta'
-}
+  wordBank: new Set<string>(),
+  wordBankInitialized: false,
+  correctWord: "porta",
+};
+
+export const initializeWordBank = createAsyncThunk(
+  "wordBank/initialize",
+  async () => {
+    let newSet;
+
+    await fetch(require("../../shared/constants/term-word-bank.txt"))
+      .then((response) => response.text())
+      .then((result) => {
+        const resultArr = result.split("\n");
+
+        newSet = new Set(resultArr);
+      });
+
+    return newSet;
+  }
+);
 
 export const gameSlice = createSlice({
-  name: 'game',
+  name: "game",
   initialState,
   reducers: {
     setBoard: (state, action: PayloadAction<string[][]>) => {
-      state.board = action.payload
+      state.board = action.payload;
     },
     setCurrentAttempt: (state, action: PayloadAction<number>) => {
-      state.currentAttempt = action.payload
+      state.currentAttempt = action.payload;
     },
     setCurrentPosition: (state, action: PayloadAction<number>) => {
-      state.currentPosition = action.payload
+      state.currentPosition = action.payload;
     },
     setCorrectWord: (state, action: PayloadAction<string>) => {
-      state.correctWord = action.payload
+      state.correctWord = action.payload;
     },
     setLetter: (state, action: PayloadAction<string>) => {
-      if (state.currentPosition > 4) return
+      if (state.currentPosition > 4) return;
 
-      state.board[state.currentAttempt][state.currentPosition] = action.payload
-      state.currentPosition += 1
+      state.board[state.currentAttempt][state.currentPosition] = action.payload;
+      state.currentPosition += 1;
     },
     onEnter: (state) => {
-      if (state.currentPosition !== 5) return
+      if (state.currentPosition !== 5) return;
 
-      state.currentAttempt += 1
-      state.currentPosition = 0
+      const currentWord = state.board[state.currentAttempt].join("");
+
+      if (state.wordBank.has(currentWord)) {
+        state.currentAttempt += 1;
+        state.currentPosition = 0;
+      } else alert("Palavra não encontrada");
+
+      if (currentWord === state.correctWord) alert("Você ganhou!");
     },
     onDelete: (state) => {
       if (
         state.currentPosition === 0 &&
-        state.board[state.currentAttempt][state.currentPosition] === ''
+        state.board[state.currentAttempt][state.currentPosition] === ""
       )
-        return
+        return;
       else if (state.currentPosition > 4) {
-        state.board[state.currentAttempt][state.currentPosition - 1] = ''
-        state.currentPosition -= 1
+        state.board[state.currentAttempt][state.currentPosition - 1] = "";
+        state.currentPosition -= 1;
       } else if (
-        state.board[state.currentAttempt][state.currentPosition] !== ''
+        state.board[state.currentAttempt][state.currentPosition] !== ""
       )
-        state.board[state.currentAttempt][state.currentPosition] = ''
+        state.board[state.currentAttempt][state.currentPosition] = "";
       else if (
-        state.board[state.currentAttempt][state.currentPosition] === '' &&
-        state.board[state.currentAttempt][state.currentPosition - 1] !== ''
+        state.board[state.currentAttempt][state.currentPosition] === "" &&
+        state.board[state.currentAttempt][state.currentPosition - 1] !== ""
       ) {
-        state.board[state.currentAttempt][state.currentPosition - 1] = ''
-        state.currentPosition -= 1
-      } else state.currentPosition -= 1
+        state.board[state.currentAttempt][state.currentPosition - 1] = "";
+        state.currentPosition -= 1;
+      } else state.currentPosition -= 1;
     },
     onLeftArrowClick: (state) => {
-      if (state.currentPosition === 0) return
+      if (state.currentPosition === 0) return;
 
-      state.currentPosition -= 1
+      state.currentPosition -= 1;
     },
     onRightArrowClick: (state) => {
-      if (state.currentPosition === 4) return
-      else state.currentPosition += 1
-    }
-  }
-})
+      if (state.currentPosition === 4) return;
+      else state.currentPosition += 1;
+    },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(initializeWordBank.fulfilled, (state, action) => {
+      if (action.payload) state.wordBank = action.payload;
+
+      state.wordBankInitialized = true;
+    });
+  },
+});
 
 export const {
   setBoard,
@@ -93,14 +127,17 @@ export const {
   onEnter,
   onDelete,
   onLeftArrowClick,
-  onRightArrowClick
-} = gameSlice.actions
+  onRightArrowClick,
+} = gameSlice.actions;
 
-export const selectBoard = (state: RootState) => state.game.board
+export const selectBoard = (state: RootState) => state.game.board;
 export const selectCurrentAttempt = (state: RootState) =>
-  state.game.currentAttempt
+  state.game.currentAttempt;
 export const selectCurrentPosition = (state: RootState) =>
-  state.game.currentPosition
-export const selectCorrectWord = (state: RootState) => state.game.correctWord
+  state.game.currentPosition;
+export const selectCorrectWord = (state: RootState) => state.game.correctWord;
+export const selectWordBank = (state: RootState) => state.game.wordBank;
+export const selectWordBankInitialized = (state: RootState) =>
+  state.game.wordBankInitialized;
 
-export const gameReducer = gameSlice.reducer
+export const gameReducer = gameSlice.reducer;
