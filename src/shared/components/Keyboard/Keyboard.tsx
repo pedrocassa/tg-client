@@ -26,7 +26,7 @@ export function Keyboard() {
         case "Enter":
           return dispatch(onEnter());
         case "Backspace":
-          return onDelete();
+          return dispatch(onDelete());
         case "ArrowLeft":
           return dispatch(onLeftArrowClick());
         case "ArrowRight":

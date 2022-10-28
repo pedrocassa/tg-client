@@ -1,13 +1,12 @@
 export const theme = {
   colors: {
-    primary: "#7D84B2",
-    secondary: "#8E9DCC",
-    secondaryLight: "#D9DBF1",
-    mainBg: "#F9F9FF",
+    primary: "#393E41",
+    secondary: "#D3D0CB",
+    mainBg: "#E7E5DF",
     letter: {
       background: {
-        correct: "#00FF00",
-        almost: "#FFA500",
+        correct: "#44BBA4",
+        almost: "#E7BB41",
       },
       color: {
         black: "#000000",
