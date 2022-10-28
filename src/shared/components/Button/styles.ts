@@ -25,7 +25,7 @@ export const Button = styled.button<StyledButtonProps>`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: ${({ theme }) => theme.colors.letter.color.white};
+  color: ${({ theme }) => theme.colors.white};
   background-color: ${({ theme, backgroundColor }) =>
     backgroundColor ? backgroundColor : theme.colors.primary};
   border-radius: ${({ theme }) => theme.border.radius.small};

@@ -3,14 +3,12 @@ export const theme = {
     primary: "#393E41",
     secondary: "#D3D0CB",
     mainBg: "#E7E5DF",
+    black: "#000000",
+    white: "#FFFFFF",
     letter: {
       background: {
         correct: "#44BBA4",
         almost: "#E7BB41",
-      },
-      color: {
-        black: "#000000",
-        white: "#FFFFFF",
       },
     },
   },

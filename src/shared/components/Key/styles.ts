@@ -10,8 +10,8 @@ export const KeyContainer = styled.div<KeyContainerProps>`
   width: ${({ bigKey }) => (bigKey ? "100px" : "50px")};
   height: 70px;
   border-radius: 5px;
-  border: ${({ theme }) => theme.colors.primary + " 2px solid"};
-  color: ${({ theme }) => theme.colors.primary};
+  border: ${({ theme }) => theme.colors.black + " 2px solid"};
+  color: ${({ theme }) => theme.colors.black};
   margin-right: ${({ isLast }) => (isLast ? "0" : "10px")};
   display: flex;
   justify-content: center;
@@ -30,7 +30,7 @@ export const KeyContainer = styled.div<KeyContainerProps>`
     height: 40px;
     font-size: ${({ theme }) => theme.font.sizes.medium};
     margin-right: ${({ isLast }) => (isLast ? "0" : "5px")};
-    border: ${({ theme }) => theme.colors.primary + " 1px solid"};
+    border: ${({ theme }) => theme.colors.black + " 1px solid"};
 
     svg {
       width: 20px;

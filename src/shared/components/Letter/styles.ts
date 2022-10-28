@@ -10,7 +10,7 @@ export const LetterContainer = styled.div<LetterContainerProps>`
   min-width: 70px;
   min-height: 70px;
   border-radius: 5px;
-  border: ${({ theme }) => theme.colors.primary + " 2px solid"};
+  border: ${({ theme }) => theme.colors.black + " 2px solid"};
   margin-right: ${({ isLast }) => (isLast ? "0" : "10px")};
 
   background-color: ${({ letterState, theme }) => {
@@ -25,14 +25,14 @@ export const LetterContainer = styled.div<LetterContainerProps>`
       letterState === LetterState.CORRECT ||
       letterState === LetterState.ALMOST
     )
-      return theme.colors.letter.color.white;
-    else return theme.colors.letter.color.black;
+      return theme.colors.white;
+    else return theme.colors.black;
   }};
 
   @media (max-width: 768px) {
     min-width: 50px;
     min-height: 50px;
-    border: ${({ theme }) => theme.colors.primary + " 1px solid"};
+    border: ${({ theme }) => theme.colors.black + " 1px solid"};
     margin-right: ${({ isLast }) => (isLast ? "0" : "5px")};
   }
 `;
@@ -51,5 +51,5 @@ export const ValueContainer = styled.div`
 export const FocusLine = styled.div`
   width: 100%;
   height: 10%;
-  background-color: ${({ theme }) => theme.colors.primary};
+  background-color: ${({ theme }) => theme.colors.black};
 `;
