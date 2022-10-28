@@ -12,7 +12,7 @@ export const store = configureStore({
         // Ignore these field paths in all actions
         ignoredActionPaths: ["payload"],
         // Ignore these paths in the state
-        ignoredPaths: ["game.wordBank"],
+        ignoredPaths: ["game.wordBank", "game.wordBankWithNoAccents"],
       },
     }),
 });

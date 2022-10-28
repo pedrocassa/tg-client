@@ -1,11 +1,13 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
+import { remove } from "remove-accents";
 
 export interface GameState {
   board: string[][];
   currentAttempt: number;
   currentPosition: number;
   wordBank: Set<string>;
+  wordBankWithNoAccents: Set<string>;
   wordBankInitialized: boolean;
   correctWord: string;
 }
@@ -23,6 +25,7 @@ const initialState: GameState = {
   currentAttempt: 0,
   currentPosition: 0,
   wordBank: new Set<string>(),
+  wordBankWithNoAccents: new Set<string>(),
   wordBankInitialized: false,
   correctWord: "porta",
 };
@@ -30,17 +33,22 @@ const initialState: GameState = {
 export const initializeWordBank = createAsyncThunk(
   "wordBank/initialize",
   async () => {
-    let newSet;
+    let normalWords;
+    let wordWithNoAccents;
 
     await fetch(require("../../shared/constants/term-word-bank.txt"))
       .then((response) => response.text())
       .then((result) => {
         const resultArr = result.split("\n");
 
-        newSet = new Set(resultArr);
+        normalWords = new Set(resultArr);
+
+        const resultArrWithNoAccents = resultArr.map((word) => remove(word));
+
+        wordWithNoAccents = new Set(resultArrWithNoAccents);
       });
 
-    return newSet;
+    return { normalWords, wordWithNoAccents };
   }
 );
 
@@ -71,7 +79,7 @@ export const gameSlice = createSlice({
 
       const currentWord = state.board[state.currentAttempt].join("");
 
-      if (state.wordBank.has(currentWord)) {
+      if (state.wordBankWithNoAccents.has(currentWord)) {
         state.currentAttempt += 1;
         state.currentPosition = 0;
       } else alert("Palavra não encontrada");
@@ -111,7 +119,10 @@ export const gameSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(initializeWordBank.fulfilled, (state, action) => {
-      if (action.payload) state.wordBank = action.payload;
+      if (action.payload) {
+        state.wordBank = action.payload.normalWords!;
+        state.wordBankWithNoAccents = action.payload.wordWithNoAccents!;
+      }
 
       state.wordBankInitialized = true;
     });
