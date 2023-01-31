@@ -1,15 +1,18 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
+import _ from "lodash";
 import { remove } from "remove-accents";
+import { GameStatus } from "types";
 
 export interface GameState {
   board: string[][];
   currentAttempt: number;
   currentPosition: number;
-  wordBank: Set<string>;
-  wordBankWithNoAccents: Set<string>;
+  wordBank: string[];
   wordBankInitialized: boolean;
   correctWord: string;
+  usedWords: string[];
+  gameState: GameStatus;
 }
 
 const initialState: GameState = {
@@ -24,31 +27,25 @@ const initialState: GameState = {
   ],
   currentAttempt: 0,
   currentPosition: 0,
-  wordBank: new Set<string>(),
-  wordBankWithNoAccents: new Set<string>(),
+  wordBank: [],
   wordBankInitialized: false,
-  correctWord: "porta",
+  correctWord: "",
+  usedWords: [],
+  gameState: GameStatus.ON_PROGRESS,
 };
 
 export const initializeWordBank = createAsyncThunk(
   "wordBank/initialize",
   async () => {
-    let normalWords;
-    let wordWithNoAccents;
+    let resultArr;
 
     await fetch(require("../../shared/constants/term-word-bank.txt"))
       .then((response) => response.text())
       .then((result) => {
-        const resultArr = result.split("\n");
-
-        normalWords = new Set(resultArr);
-
-        const resultArrWithNoAccents = resultArr.map((word) => remove(word));
-
-        wordWithNoAccents = new Set(resultArrWithNoAccents);
+        resultArr = result.split("\n");
       });
 
-    return { normalWords, wordWithNoAccents };
+    return resultArr;
   }
 );
 
@@ -79,12 +76,31 @@ export const gameSlice = createSlice({
 
       const currentWord = state.board[state.currentAttempt].join("");
 
-      if (state.wordBankWithNoAccents.has(currentWord)) {
-        state.currentAttempt += 1;
-        state.currentPosition = 0;
+      const hasWordInTheBank = state.wordBank.find(
+        (word: string) => remove(word) === currentWord
+      );
+
+      if (hasWordInTheBank) {
+        if (!state.usedWords.includes(currentWord)) {
+          state.currentAttempt += 1;
+          state.currentPosition = 0;
+
+          state.usedWords.push(hasWordInTheBank);
+        }
       } else alert("Palavra não encontrada");
 
-      if (currentWord === state.correctWord) alert("Você ganhou!");
+      if (currentWord === remove(state.correctWord)) {
+        setBoard(
+          state.board.splice(
+            state.currentAttempt - 1,
+            1,
+            state.correctWord.split("")
+          )
+        );
+        state.gameState = GameStatus.VICTORY;
+      }
+
+      console.log(state.gameState, state.correctWord);
     },
     onDelete: (state) => {
       if (
@@ -120,8 +136,9 @@ export const gameSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(initializeWordBank.fulfilled, (state, action) => {
       if (action.payload) {
-        state.wordBank = action.payload.normalWords!;
-        state.wordBankWithNoAccents = action.payload.wordWithNoAccents!;
+        state.wordBank = action.payload!;
+        state.correctWord = _.sample(action.payload!) ?? "";
+        state.gameState = GameStatus.ON_PROGRESS;
       }
 
       state.wordBankInitialized = true;

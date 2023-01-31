@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { rootReducer } from "./rootReducers";
-import { enableMapSet } from "immer";
+import { enableAllPlugins } from "immer";
 
-enableMapSet();
+enableAllPlugins();
 
 export const store = configureStore({
   reducer: rootReducer,
@@ -12,7 +12,7 @@ export const store = configureStore({
         // Ignore these field paths in all actions
         ignoredActionPaths: ["payload"],
         // Ignore these paths in the state
-        ignoredPaths: ["game.wordBank", "game.wordBankWithNoAccents"],
+        ignoredPaths: ["game.wordBank"],
       },
     }),
 });

@@ -1,1 +1,2 @@
-export * from './LetterState'
+export * from "./GameStatus";
+export * from "./LetterState";

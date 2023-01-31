@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="399b5147-f3b6-4150-bae1-d78cb6acfbab" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/types/enum/GameStatus.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/store/game/game.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/game/game.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/store.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/types/enum/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/enum/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -29,22 +32,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/pedrocassa/Documentos/tg-client&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/home/pedrocassa/Documentos/tg-client/node_modules/prettier&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;settings.javascript.prettier&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/home/pedrocassa/Documentos/tg-client/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/home/pedrocassa/Documentos/tg-client/src/types/enum",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "yarn",
+    "prettierjs.PrettierConfiguration.Package": "/home/pedrocassa/Documentos/tg-client/node_modules/prettier",
+    "settings.editor.selected.configurable": "settings.javascript.prettier",
+    "ts.external.directory.path": "/home/pedrocassa/Documentos/tg-client/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/types/enum" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/shared/constants" />
       <recent name="$PROJECT_DIR$/src" />
@@ -61,7 +67,16 @@
       <workItem from="1666704129827" duration="1295000" />
       <workItem from="1666895470234" duration="4499000" />
       <workItem from="1666969877455" duration="2650000" />
-      <workItem from="1666987661873" duration="4518000" />
+      <workItem from="1666987661873" duration="4970000" />
+      <workItem from="1667219024734" duration="37000" />
+      <workItem from="1668888523231" duration="15000" />
+      <workItem from="1668892388699" duration="7000" />
+      <workItem from="1668892794282" duration="26000" />
+      <workItem from="1668893390126" duration="338000" />
+      <workItem from="1668953940014" duration="1104000" />
+      <workItem from="1669037281293" duration="129000" />
+      <workItem from="1669335309657" duration="1141000" />
+      <workItem from="1675201434891" duration="5581000" />
     </task>
     <servers />
   </component>
