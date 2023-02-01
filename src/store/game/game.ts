@@ -12,7 +12,7 @@ export interface GameState {
   wordBankInitialized: boolean;
   correctWord: string;
   usedWords: string[];
-  gameState: GameStatus;
+  gameStatus: GameStatus;
 }
 
 const initialState: GameState = {
@@ -31,7 +31,7 @@ const initialState: GameState = {
   wordBankInitialized: false,
   correctWord: "",
   usedWords: [],
-  gameState: GameStatus.ON_PROGRESS,
+  gameStatus: GameStatus.ON_PROGRESS,
 };
 
 export const initializeWordBank = createAsyncThunk(
@@ -97,10 +97,8 @@ export const gameSlice = createSlice({
             state.correctWord.split("")
           )
         );
-        state.gameState = GameStatus.VICTORY;
+        state.gameStatus = GameStatus.VICTORY;
       }
-
-      console.log(state.gameState, state.correctWord);
     },
     onDelete: (state) => {
       if (
@@ -132,13 +130,31 @@ export const gameSlice = createSlice({
       if (state.currentPosition === 4) return;
       else state.currentPosition += 1;
     },
+    refresh: (state) => {
+      state.board = [
+        ["", "", "", "", ""],
+        ["", "", "", "", ""],
+        ["", "", "", "", ""],
+        ["", "", "", "", ""],
+        ["", "", "", "", ""],
+        ["", "", "", "", ""],
+        ["", "", "", "", ""],
+      ];
+      state.wordBank = [];
+      state.wordBankInitialized = false;
+      state.correctWord = "";
+      state.usedWords = [];
+      state.currentAttempt = 0;
+      state.currentPosition = 0;
+      state.gameStatus = GameStatus.ON_PROGRESS;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(initializeWordBank.fulfilled, (state, action) => {
       if (action.payload) {
         state.wordBank = action.payload!;
         state.correctWord = _.sample(action.payload!) ?? "";
-        state.gameState = GameStatus.ON_PROGRESS;
+        state.gameStatus = GameStatus.ON_PROGRESS;
       }
 
       state.wordBankInitialized = true;
@@ -156,6 +172,7 @@ export const {
   onDelete,
   onLeftArrowClick,
   onRightArrowClick,
+  refresh,
 } = gameSlice.actions;
 
 export const selectBoard = (state: RootState) => state.game.board;
